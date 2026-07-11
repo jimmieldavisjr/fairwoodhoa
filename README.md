@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fairwood Greens HOA — Homepage Redesign
 
-## Getting Started
+A polished, mobile-first homepage for the **Fairwood Greens Homeowners'
+Association** (Renton, WA), rebuilt as a modern civic/community portal.
 
-First, run the development server:
+Built with **Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 ·
+shadcn/ui-style components · Lucide icons**.
+
+---
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (type-checked)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design decisions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Corporate-minimal, brand-accented.** The interface is carried by a neutral
+system — **charcoal**, white, and cool light-grey — with **forest green and
+heritage gold used only as accents** (primary buttons, links, badges, icon
+hovers, small dividers). Dark charcoal anchors the utility bar, the meeting
+date tile, the engagement band, and the footer; everything else stays light
+and airy. This keeps the Fairwood Greens identity present without the green
+dominating the page. Typography and the mark come straight from the brand
+guide.
 
-## Learn More
+**Typography with two jobs.** `Libre Baskerville` (the wordmark's serif) is
+reserved for display headings so the brand's established, civic character
+carries through; `Inter` handles all body and UI text for maximum legibility
+on phones. This keeps the "modern sans-serif" feel while preserving identity.
 
-To learn more about Next.js, take a look at the following resources:
+**The official seal, front and centre.** The hero pairs the copy with the
+real Fairwood Greens circular logo (`public/fw-hoa-logo.png`) on the right.
+The header intentionally drops the logo and leads instead with a **bold
+wordmark lockup** — "FAIRWOOD GREENS" over "HOMEOWNERS' ASSOCIATION" with a
+slim gold→green accent bar — so the association name is the primary identity
+in the navigation. Announcement cards use restrained, minimal SVG headers (a
+faint topographic contour motif from the brand patterns plus a single colored
+category icon) rather than stock photography.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Residents first.** The most common tasks — pay dues, submit a request, find
+documents, see the next meeting — sit in a quick-action grid that overlaps the
+hero, so nothing important is more than one tap away. The next meeting is
+presented as structured data (date tile, time, location, agenda/calendar
+actions), not a blog post. Urgent notices get a refined, dismissible banner.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Accessibility baked in (WCAG 2.2 AA-conscious).**
+- Semantic landmarks (`header`/`main`/`nav`/`footer`), logical heading order
+  (one `h1`, section `h2`s, card `h3`s), and a "Skip to main content" link.
+- Visible keyboard focus rings on every interactive element; icon-only
+  controls carry `aria-label`s; search fields have real (`sr-only`) labels.
+- ≥44px touch targets, `prefers-reduced-motion` support, and contrast-checked
+  text (e.g. a darker "gold ink" token for gold labels on light surfaces).
+- Accessible mobile navigation via a focus-trapped Radix Dialog sheet.
+- No horizontal scroll, no floating chat widget, no empty filler sections.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Component structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├─ app/
+│  ├─ layout.tsx           # fonts (Inter + Libre Baskerville), metadata, skip link
+│  ├─ page.tsx             # homepage composition
+│  └─ globals.css          # design tokens (brand + shadcn), base styles, animations
+├─ lib/
+│  ├─ utils.ts             # cn() class merger
+│  └─ site-content.ts      # all sample content (nav, quick actions, meeting, news, docs)
+└─ components/
+   ├─ ui/                  # shadcn-style primitives: button, card, badge, input, sheet
+   ├─ brand/
+   │  └─ brand-logo.tsx    # BrandEmblem (SVG roundel) + Wordmark lockup
+   └─ site/
+      ├─ site-header.tsx        # sticky header, utility bar, desktop nav, search toggle
+      ├─ mobile-nav.tsx         # hamburger + slide-in sheet
+      ├─ hero.tsx / hero-backdrop.tsx
+      ├─ quick-actions.tsx
+      ├─ community-alert.tsx    # dismissible (remembers via localStorage)
+      ├─ upcoming-meeting.tsx
+      ├─ news-events.tsx / announcement-card.tsx / card-banner.tsx
+      ├─ documents-section.tsx
+      ├─ engagement-section.tsx # ways to get involved + notification signup
+      ├─ site-footer.tsx
+      └─ section-heading.tsx    # reusable eyebrow + serif title
+```
+
+All content is centralized in `src/lib/site-content.ts`, so the HOA can update
+copy, links, and data without touching component markup.
+
+---
+
+## Assets & information still needed from the HOA
+
+The homepage ships with realistic **placeholder** content. To go live, we need:
+
+**Imagery**
+- The circular **logo** is integrated (`public/fw-hoa-logo.png`). A **vector
+  (SVG) version** would render even crisper and allow a transparent
+  background — recommended if available.
+- *Optional:* a high-resolution **entrance / community photo** if you later
+  want a photographic hero variant instead of the seal-on-light treatment.
+- Optional photos for the news cards and engagement section.
+
+**Content & data**
+- Real **navigation targets / URLs** and the **Resident Portal** login URL
+  (all links are currently `#` placeholders).
+- Confirmed **contact details**: office phone, 24/7 security line, and the HOA
+  email (placeholders in use: office `(425) 555-0180`, security `(425) 555-0177`,
+  `info@fairwoodgreenshoa.org`).
+- Current **board-meeting schedule**, location, and the hybrid/virtual link.
+- The actual **document library** (governing docs, minutes, agendas,
+  financials, ARC guidelines, newsletters) and where they're hosted.
+- Live **announcements / calendar** feed, or a CMS choice for staff to post.
+
+**Integrations & compliance**
+- **Dues payment** provider (e.g. the management company's portal or a
+  payment processor) for "Pay HOA Dues".
+- **Request / ARC submission** form or ticketing destination.
+- **Email notification** service for the subscribe form (double opt-in).
+- Final **Privacy Policy** and **Accessibility Statement** copy.
+- Guidance on any **resident-only data** so nothing sensitive is exposed
+  publicly (the current build intentionally shows none).
+# fwhoa
