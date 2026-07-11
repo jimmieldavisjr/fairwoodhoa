@@ -1,26 +1,192 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Fairwood Greens HOA — Design Tokens
+   Corporate / minimal. Charcoal + white/grey do the heavy
+   lifting; forest green and heritage gold are identity accents.
+   ============================================================ */
+
 :root {
+  --radius: 0.75rem;
+
+  /* Brand accents (identity) */
+  --evergreen: #0d3b26;
+  --forest: #1f5c3d; /* green accent */
+  --emerald: #2f7d57; /* link / hover accent */
+  --sage: #61776a;
+  --mist: #a6b4b6;
+  --ivory: #f7f7f3;
+  --gold: #a5852b; /* heritage gold accent */
+  --gold-ink: #7a5f14; /* accessible gold for text on light surfaces */
+
+  /* Neutral corporate base */
+  --charcoal: #1e2329; /* dark sections */
+  --charcoal-deep: #15181d;
+
+  /* Semantic tokens (shadcn-compatible) */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2429; /* neutral charcoal text */
+  --surface: #f4f5f6; /* cool light-grey section background */
+
+  --card: #ffffff;
+  --card-foreground: #1f2429;
+
+  --popover: #ffffff;
+  --popover-foreground: #1f2429;
+
+  --primary: #1f5c3d; /* green — used sparingly for primary CTAs */
+  --primary-foreground: #ffffff;
+
+  --secondary: #eef0f2; /* neutral light grey */
+  --secondary-foreground: #2b3138;
+
+  --muted: #f4f5f6;
+  --muted-foreground: #5c6672; /* neutral grey */
+
+  --accent: #edf2ee; /* subtle green tint for small accents */
+  --accent-foreground: #1f5c3d;
+
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+
+  --border: #e4e6ea; /* neutral border */
+  --input: #d9dce1;
+  --ring: #1f5c3d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand + neutral utilities */
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-deep: var(--charcoal-deep);
+  --color-evergreen: var(--evergreen);
+  --color-forest: var(--forest);
+  --color-emerald: var(--emerald);
+  --color-sage: var(--sage);
+  --color-mist: var(--mist);
+  --color-ivory: var(--ivory);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-libre), Georgia, "Times New Roman", serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 10px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--forest) 20%, transparent);
+  }
+
+  /* Consistent, visible keyboard focus for anything not already handled */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---- Mobile navigation sheet + overlay animations ---- */
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes sheet-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.sheet-overlay[data-state="open"] {
+  animation: overlay-in 0.2s ease-out;
+}
+.sheet-overlay[data-state="closed"] {
+  animation: overlay-out 0.2s ease-in;
+}
+.sheet-panel[data-state="open"] {
+  animation: sheet-in 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+.sheet-panel[data-state="closed"] {
+  animation: sheet-out 0.26s cubic-bezier(0.32, 0.72, 0, 1);
 }
