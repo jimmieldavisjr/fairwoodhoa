@@ -1,3 +1,4 @@
+import { PasscodeGate } from "@/components/site/passcode-gate";
 import { SiteHeader } from "@/components/site/site-header";
 import { Hero } from "@/components/site/hero";
 import { QuickActions } from "@/components/site/quick-actions";
@@ -10,7 +11,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 
 export default function HomePage() {
   return (
-    <>
+    <PasscodeGate>
       <SiteHeader />
       <main id="main" className="flex-1">
         <Hero />
@@ -22,6 +23,6 @@ export default function HomePage() {
         <EngagementSection />
       </main>
       <SiteFooter />
-    </>
+    </PasscodeGate>
   );
 }
