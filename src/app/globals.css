@@ -190,3 +190,44 @@
 .sheet-panel[data-state="closed"] {
   animation: sheet-out 0.26s cubic-bezier(0.32, 0.72, 0, 1);
 }
+
+/* ---- Hero slider: slow zoom + pan (Ken Burns) on the active slide ---- */
+@keyframes kb-1 {
+  from {
+    transform: scale(1.06) translate3d(1.5%, 1.5%, 0);
+  }
+  to {
+    transform: scale(1.2) translate3d(-1.5%, -1%, 0);
+  }
+}
+@keyframes kb-2 {
+  from {
+    transform: scale(1.2) translate3d(-2%, 0, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(2%, 1.5%, 0);
+  }
+}
+@keyframes kb-3 {
+  from {
+    transform: scale(1.08) translate3d(-1.5%, -1.5%, 0);
+  }
+  to {
+    transform: scale(1.22) translate3d(1.5%, 1%, 0);
+  }
+}
+
+.hero-kb-1,
+.hero-kb-2,
+.hero-kb-3 {
+  will-change: transform;
+}
+.hero-kb-1 {
+  animation: kb-1 8s ease-out both;
+}
+.hero-kb-2 {
+  animation: kb-2 8s ease-out both;
+}
+.hero-kb-3 {
+  animation: kb-3 8s ease-out both;
+}

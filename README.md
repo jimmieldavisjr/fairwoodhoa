@@ -34,14 +34,19 @@ reserved for display headings so the brand's established, civic character
 carries through; `Inter` handles all body and UI text for maximum legibility
 on phones. This keeps the "modern sans-serif" feel while preserving identity.
 
-**The official seal, front and centre.** The hero pairs the copy with the
-real Fairwood Greens circular logo (`public/fw-hoa-logo.png`) on the right.
-The header intentionally drops the logo and leads instead with a **bold
-wordmark lockup** — "FAIRWOOD GREENS" over "HOMEOWNERS' ASSOCIATION" with a
-slim gold→green accent bar — so the association name is the primary identity
-in the navigation. Announcement cards use restrained, minimal SVG headers (a
-faint topographic contour motif from the brand patterns plus a single colored
-category icon) rather than stock photography.
+**A cinematic but restrained hero.** The hero runs an **auto-rotating photo
+slider** (`public/hero/`, 6-second crossfade, pauses on hover, respects
+`prefers-reduced-motion`) behind a **charcoal gradient overlay** so white
+copy stays readable and the imagery reads as atmosphere, not decoration. The
+real Fairwood Greens seal (`public/fw-hoa-logo.png`) sits on the right as a
+compact **circular badge** — the square logo is clipped to a clean circle on
+the dark background. Manual dot controls sit bottom-right (bottom-centre on
+mobile). The header intentionally drops the logo and leads instead with a
+**bold wordmark lockup** — "FAIRWOOD GREENS" over "HOMEOWNERS' ASSOCIATION"
+with a slim gold→green accent bar — so the association name is the primary
+identity in the navigation. Announcement cards use restrained, minimal SVG
+headers (a faint topographic contour motif plus a single colored category
+icon) rather than stock photography.
 
 **Residents first.** The most common tasks — pay dues, submit a request, find
 documents, see the next meeting — sit in a quick-action grid that overlaps the
@@ -100,11 +105,13 @@ copy, links, and data without touching component markup.
 The homepage ships with realistic **placeholder** content. To go live, we need:
 
 **Imagery**
+- The three **hero slider photos** in `public/hero/` are **Unsplash stock
+  placeholders** (generic golf-course scenery), not Fairwood Greens itself.
+  Please supply **3–5 genuine high-resolution community/course photos**
+  (landscape, ≥2000px wide) to replace them, and confirm usage rights.
 - The circular **logo** is integrated (`public/fw-hoa-logo.png`). A **vector
   (SVG) version** would render even crisper and allow a transparent
   background — recommended if available.
-- *Optional:* a high-resolution **entrance / community photo** if you later
-  want a photographic hero variant instead of the seal-on-light treatment.
 - Optional photos for the news cards and engagement section.
 
 **Content & data**

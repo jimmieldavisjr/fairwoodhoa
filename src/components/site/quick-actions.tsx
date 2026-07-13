@@ -5,7 +5,7 @@ import { quickActions } from "@/lib/site-content";
 export function QuickActions() {
   return (
     <section aria-labelledby="quick-actions-heading" className="relative z-10">
-      <div className="mx-auto -mt-10 max-w-7xl px-4 sm:-mt-14 sm:px-6 lg:px-8">
+      <div className="mx-auto mt-12 max-w-7xl px-4 sm:mt-14 sm:px-6 lg:px-8">
         <h2 id="quick-actions-heading" className="sr-only">
           Resident quick actions
         </h2>
