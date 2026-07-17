@@ -94,8 +94,9 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
                   If you would like to get in touch, please email us at{" "}
                   <a
                     href="mailto:life@jimmieldavisjr.com"
-                    className="font-semibold text-forest underline decoration-gold/70 underline-offset-4 hover:text-evergreen"
+                    className="inline-flex items-center gap-1 font-semibold text-forest underline decoration-gold/70 underline-offset-4 hover:text-evergreen"
                   >
+                    <Mail className="size-4" aria-hidden />
                     life@jimmieldavisjr.com
                   </a>
                   . Thank you.
