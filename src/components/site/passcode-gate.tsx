@@ -3,7 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Mail, X } from "lucide-react";
+import { Info, Mail, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -66,9 +66,7 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
               <div className="bg-gradient-to-br from-evergreen to-forest px-6 pb-12 pt-7 sm:px-8">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex size-11 items-center justify-center rounded-xl bg-white/15 text-gold ring-1 ring-white/20">
-                    <span className="text-lg font-bold" aria-hidden>
-                      i
-                    </span>
+                    <Info className="size-5" aria-hidden />
                   </div>
                   <Dialog.Close
                     className="rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
