@@ -66,7 +66,7 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
               <div className="bg-gradient-to-br from-evergreen to-forest px-6 pb-12 pt-7 sm:px-8">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex size-11 items-center justify-center rounded-xl bg-white/15 text-gold ring-1 ring-white/20">
-                    <Info className="size-5" aria-hidden />
+                    <Info className="size-5" aria-hidden="true" />
                   </div>
                   <Dialog.Close
                     className="rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
@@ -94,7 +94,7 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
                     href="mailto:life@jimmieldavisjr.com"
                     className="inline-flex items-center gap-1 font-semibold text-forest underline decoration-gold/70 underline-offset-4 hover:text-evergreen"
                   >
-                    <Mail className="size-4" aria-hidden />
+                    <Mail className="size-4" aria-hidden="true" />
                     life@jimmieldavisjr.com
                   </a>
                   . Thank you.
