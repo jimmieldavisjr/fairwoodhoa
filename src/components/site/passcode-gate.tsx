@@ -2,6 +2,8 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Mail, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -19,6 +21,7 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
   // matches the client's first render, avoiding a hydration mismatch.
   const [mounted, setMounted] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
+  const [showPrototypeNotice, setShowPrototypeNotice] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -37,6 +40,7 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
     event.preventDefault();
     if (value.trim().toLowerCase() === PASSCODE) {
       setUnlocked(true);
+      setShowPrototypeNotice(true);
       setError(false);
       try {
         window.sessionStorage.setItem(STORAGE_KEY, "true");
@@ -49,7 +53,63 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
   }
 
   if (mounted && unlocked) {
-    return <>{children}</>;
+    return (
+      <>
+        {children}
+        <Dialog.Root
+          open={showPrototypeNotice}
+          onOpenChange={setShowPrototypeNotice}
+        >
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 z-[9998] bg-charcoal/70 backdrop-blur-sm" />
+            <Dialog.Content className="fixed left-1/2 top-1/2 z-[9999] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] focus:outline-none">
+              <div className="bg-gradient-to-br from-evergreen to-forest px-6 pb-12 pt-7 sm:px-8">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex size-11 items-center justify-center rounded-xl bg-white/15 text-gold ring-1 ring-white/20">
+                    <span className="text-lg font-bold" aria-hidden>
+                      i
+                    </span>
+                  </div>
+                  <Dialog.Close
+                    className="rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    aria-label="Close notice"
+                  >
+                    <X className="size-5" />
+                  </Dialog.Close>
+                </div>
+                <p className="mt-7 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+                  Prototype notice
+                </p>
+                <Dialog.Title className="mt-2 font-serif text-2xl font-bold text-white sm:text-3xl">
+                  Welcome to the Fairwood HOA preview
+                </Dialog.Title>
+              </div>
+
+              <div className="-mt-5 rounded-t-2xl bg-white px-6 pb-6 pt-7 sm:px-8 sm:pb-8">
+                <Dialog.Description className="text-base leading-7 text-muted-foreground">
+                  This prototype website showcases a potential design for the
+                  Fairwood HOA. It will be taken down in 14 business days.
+                </Dialog.Description>
+                <p className="mt-4 text-sm leading-6 text-muted-foreground">
+                  If you would like to get in touch, please email us at{" "}
+                  <a
+                    href="mailto:life@jimmieldavisjr.com"
+                    className="font-semibold text-forest underline decoration-gold/70 underline-offset-4 hover:text-evergreen"
+                  >
+                    life@jimmieldavisjr.com
+                  </a>
+                  . Thank you.
+                </p>
+
+                <Dialog.Close asChild>
+                  <Button className="mt-7 w-full sm:w-auto">Continue to site</Button>
+                </Dialog.Close>
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </>
+    );
   }
 
   return (
