@@ -61,8 +61,8 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
           onOpenChange={setShowPrototypeNotice}
         >
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-[9998] bg-charcoal/70 backdrop-blur-sm" />
-            <Dialog.Content className="fixed left-1/2 top-1/2 z-[9999] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] focus:outline-none">
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-sm" />
+            <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] focus:outline-none">
               <div className="bg-gradient-to-br from-evergreen to-forest px-6 pb-12 pt-7 sm:px-8">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex size-11 items-center justify-center rounded-xl bg-white/15 text-gold ring-1 ring-white/20">
