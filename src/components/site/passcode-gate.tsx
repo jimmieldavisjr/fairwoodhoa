@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 
 const PASSCODE = "fairwood2026";
 const STORAGE_KEY = "fgha-prototype-unlocked";
+const CONTACT_EMAIL = "life@jimmieldavisjr.com";
 
 /**
  * Prototype-only cover screen. Blocks the homepage behind a full-screen
@@ -91,11 +92,11 @@ export function PasscodeGate({ children }: { children: React.ReactNode }) {
                 <p className="mt-4 text-sm leading-6 text-muted-foreground">
                   If you would like to get in touch, please email us at{" "}
                   <a
-                    href="mailto:life@jimmieldavisjr.com"
+                    href={`mailto:${CONTACT_EMAIL}`}
                     className="inline-flex items-center gap-1 font-semibold text-forest underline decoration-gold/70 underline-offset-4 hover:text-evergreen"
                   >
                     <Mail className="size-4" aria-hidden="true" />
-                    life@jimmieldavisjr.com
+                    {CONTACT_EMAIL}
                   </a>
                   . Thank you.
                 </p>
